@@ -23,6 +23,7 @@ async def on_ready():
 	print("hello world!")
 
 prefix = "!"
+consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 @client.event
 async def on_message(message):
 
@@ -51,7 +52,46 @@ async def on_message(message):
             else:
                 await message.channel.send("unknown command, here are the commands for help", embed=auhelpmessage)
         elif (argslist[0] == "morelike"):
-            await message.channel.send("nope")
+            morelike = message.content[10:].lower()
+            #bully vresod
+            if "vresod" in morelike:
+                morelike = morelike.replace("vresod", "big dumb stupid idiot head nerd")
+                await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
+                return
+            # fart
+            if (random.randrange(0, 2) == 1):
+                morelike = morelike.replace("fort","fart")
+                morelike = morelike.replace("fert","fart")
+                morelike = morelike.replace("firt","fart")
+                morelike = morelike.replace("furt","fart")
+            # gay and lame
+            if (random.randrange(0, 2) == 1):
+                morelike = morelike.replace("ga","gay")
+                for x in consonants:
+                    morelike = morelike.replace(f"{x}ay","gay")
+            else:
+                for x in consonants:
+                    morelike = morelike.replace(f"{x}ame","lame")
+            # no
+            for x in consonants:
+                morelike = morelike.replace(f"{x}o ","no")
+            # i to o and double o
+            if (random.randrange(0, 2) == 1):
+                morelike = morelike.replace("i","o")
+            else:
+                morelike = morelike.replace("o", "oo")
+            # ae to æ
+            for x in consonants:
+                morelike = morelike.replace(f"a{x}e",f"æ{x}")
+            morelike = morelike.replace(f"ae",f"æ")
+            # a to e
+            morelike = morelike.replace("a", "e")
+            for x in consonants:
+                morelike = morelike.replace(f"{x}ee",f"pee")
+            if morelike == message.content[10:].lower():
+                await message.channel.send(f"{morelike} is perfect, it cannot be changed")
+            else:
+                await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
         elif (argslist[0] == "pdp"):
             await message.channel.send(f"your randomly selected puppy dog pals song is {pdpsongs[random.randrange(len(pdpsongs))]}")
         elif (argslist[0] == "help"):
