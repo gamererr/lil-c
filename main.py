@@ -58,6 +58,10 @@ async def on_message(message):
                 morelike = morelike.replace("vresod", "big dumb stupid idiot head nerd")
                 await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
                 return
+	    if "amazon" in morelike:
+                morelike = morelike.replace("amazon", "stupidmazon")
+                await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
+                return
             # fart
             if (random.randrange(0, 2) == 1):
                 morelike = morelike.replace("fort","fart")
