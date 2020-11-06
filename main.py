@@ -3,6 +3,7 @@
 import random
 import asyncio
 import discord
+import requests
 from discord import Member, Embed
 
 with open("tokenfile", "r") as tokenfile:
@@ -23,9 +24,16 @@ async def on_ready():
 	print("hello world!")
 
 prefix = "!"
+perfectwords = ["big chungus", "chickenwinna", "ur mom"]
 consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 @client.event
 async def on_message(message):
+
+    async def morelikeend(morelike, original):
+        if morelike.lower() == original.lower():
+            await message.channel.send(f"{original} is perfect, it cannot be changed")
+        else:
+            await message.channel.send(f"{original}? more like {morelike}")
 
     helpmessage = discord.Embed(title="Commands", description="au - commands for au winnas, has extra arguemnts \nmorelike [word] - responds with '[word]? more like [word but edited]' \npdp - gives a random pdp song", color=0x7e01e4)
     helpmessage.set_footer(text="comands with extra arguments can be used to get more info out of with !help [command]")
@@ -39,6 +47,17 @@ async def on_message(message):
     args = message.content.replace(prefix,"")
     argslist = args.split(" ")
 
+    modchat = discord.utils.get(message.guild.channels, id=757449377819263028)
+
+    if ("submited an au chickenwinna, " in message.content) and (message.author == client.user) and (message.channel == modchat):
+        await message.add_reaction("✅")
+        await message.add_reaction("☑️")
+        await message.add_reaction("❌")
+        await message.add_reaction("❓")
+
+    if message.author == client.user:
+        return
+
     if message.content.startswith(prefix):
         if (argslist[0] == "au"):
             if (argslist[1] == "list"):
@@ -46,18 +65,37 @@ async def on_message(message):
             elif (argslist[1] == "random"):
                 await message.channel.send(auwinnas[random.randrange(len(auwinnas))])
             elif (argslist[1] == "submit"):
-                await message.channel.send("nope")
+                try:
+                    ausubmitname = argslist[2]
+                except IndexError:
+                    await message.channel.send("you need an au name")
+                try:
+                    ausubmitemoji = message.attachments[0]
+                except IndexError:
+                    await message.channel.send("you need an image")
+                r = requests.get(ausubmitemoji.url, allow_redirects=True)
+                open('newemoji.png', 'wb').write(r.content)
+                open('newemojiname', 'wt').write(ausubmitname)
+                files = await attachments_to_files(message.attachments,True)
+                await modchat.send(f"{message.author.mention} submited an au chickenwinna, *{ausubmitname}*", files=files)
             elif (argslist[1] == "help"):
+                auhelpmessage.color = 0x00C400
                 await message.channel.send(embed=auhelpmessage)
             else:
+                auhelpmessage.color = 0xFF0000
                 await message.channel.send("unknown command, here are the commands for help", embed=auhelpmessage)
         elif (argslist[0] == "morelike"):
             morelike = message.content[10:].lower()
             #bully vresod
             if "vresod" in morelike:
                 morelike = morelike.replace("vresod", "big dumb stupid idiot head nerd")
-                await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
+                morelikeend(morelike, original=morelike)
                 return
+            for word in perfectwords:
+                if morelike == word:
+                    morelike = message.content[10:]
+                    await morelikeend(morelike, original=morelike)
+                    return
             # fart
             if (random.randrange(0, 2) == 1):
                 morelike = morelike.replace("fort","fart")
@@ -72,14 +110,10 @@ async def on_message(message):
             else:
                 for x in consonants:
                     morelike = morelike.replace(f"{x}ame","lame")
-            # no
-            for x in consonants:
-                morelike = morelike.replace(f"{x}o ","no")
-            # i to o and double o
-            if (random.randrange(0, 2) == 1):
-                morelike = morelike.replace("i","o")
-            else:
-                morelike = morelike.replace("o", "oo")
+            # double o
+            morelike = morelike.replace("o", "oo")
+            # i to o
+            morelike = morelike.replace("i","o")
             # ae to æ
             for x in consonants:
                 morelike = morelike.replace(f"a{x}e",f"æ{x}")
@@ -88,15 +122,54 @@ async def on_message(message):
             morelike = morelike.replace("a", "e")
             for x in consonants:
                 morelike = morelike.replace(f"{x}ee",f"pee")
-            if morelike == message.content[10:].lower():
-                await message.channel.send(f"{morelike} is perfect, it cannot be changed")
-            else:
-                await message.channel.send(f"{message.content[10:].lower()}? more like {morelike}")
+            await morelikeend(morelike, original=message.content[10:].lower())
         elif (argslist[0] == "pdp"):
             await message.channel.send(f"your randomly selected puppy dog pals song is {pdpsongs[random.randrange(len(pdpsongs))]}")
         elif (argslist[0] == "help"):
+            helpmessage.color = 0x00C400
             await message.channel.send(embed=helpmessage)
         else:
+            helpmessage.color = 0xFF0000
             await message.channel.send("unknown command, here are the commands for help", embed=helpmessage)
+
+@client.event
+async def on_reaction_add(reaction, user):
+    message = reaction.message
+    modchat = discord.utils.get(message.guild.channels, id=757449377819263028)
+    general = discord.utils.get(message.guild.channels, id=757433959117488193)
+    if user == client.user:
+        return
+    if not ("submited an au chickenwinna, " in message.content) and (message.author == client.user) and (message.channel == modchat):
+        return
+
+    newemojiname = open('newemojiname', 'rt').read()
+    newemoji = open('newemoji.png', 'rb').read()
+
+    if reaction.emoji == "✅":
+        try:
+            await message.guild.create_custom_emoji(name=newemojiname,image=newemoji)
+            await general.send(f"{message.mentions[0].mention} your au submission for {newemojiname} has been acccepted")
+        except discord.errors.HTTPException:
+            await general.send(f"{message.mentions[0].mention} your au submission for {newemojiname} has been acccepted but could not be made into an emoji due to an error (emoji cap, invalid character, etc)")
+        await message.clear_reaction("✅")
+        await message.clear_reaction("☑️")
+        await message.clear_reaction("❌")
+        await message.clear_reaction("❓")
+    elif reaction.emoji == "☑️":
+        await general.send(f"{message.mentions[0].mention} your au submission for {newemojiname} has been acccepted but wont be an emoji")
+        await message.clear_reaction("✅")
+        await message.clear_reaction("☑️")
+        await message.clear_reaction("❌")
+        await message.clear_reaction("❓")
+    elif reaction.emoji == "❌":
+        await general.send(f"{message.mentions[0].mention} your au submission for {newemojiname} has been denied. ask {user} why that is if you have questions")
+        await message.clear_reaction("✅")
+        await message.clear_reaction("☑️")
+        await message.clear_reaction("❌")
+        await message.clear_reaction("❓")
+    elif reaction.emoji == "❓":
+        await message.channel.send(f"{user.name}, here is what the emoji inputs do: \n✅ accepts and makes the submission an emoji \n☑️ accepts but does not make submission and emoji \n❌ denies the submission\n❓ you are reading it now idiot")
+    else:
+        return
 
 client.run(token)
