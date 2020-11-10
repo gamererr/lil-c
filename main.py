@@ -34,7 +34,7 @@ prefix = "!"
 # lists
 auwinnas = ["<:Chickenwinna:759085236679868526> - chickenwinna prime, the basic chickenwinna", "<:ThiefChickenwinna:757436624152821770> - Thiefwinna", "<:WarWinna:759283034645594112> - WarWinna", "<:ThatWinna:757436113743773818> - ThatWinna", "<:StinkyWinna:760016992505036820> - StinkyWinna, he smells", "<:PogWinna:759044866444361788> - POGCHAMP", "<:Chickenwinna2020:757436053589196900> - Chickenwinna 2020", "<:ArrowWinna:759053771773968395> - KoichiWinna (arrow alt)", "<:ChickenwinnaBaldMartin:757436055766171649> - MartinWinna", "<:ChickenwinnaDistraction:757436043589976155> - DistractionWinna, what was i saying again?", "<:ChickenwinnaFnafCostume:757436050770493571> - FreddyWinna", "<:ChickenwinnaFubiBu:771180135487111219> - Fubibu Junor", "<:ChickenwinnaGame:757436050875613226> - Gamewinna, the gamer has become the game", "<:ChickenwinnaGhost:757436043761942568> - GhostWinna", "<:ChickenwinnaGolden:757436052502872124> - GoldenWinna", "<:ChickenwinnaSock:758036446006214780> - SockWinna", "<:ChickenwinnaSociety:757436044055674890> - JokerWinna", "<:ChickenwinnaSad:757436043816468490> - SadWinna", "<:ChickenwinnaPasta:757436048211968121> - NoodleWinna", "<:ChickenwinnaOriginal:757436043837308960> - OGWinna", "<:ChickenwinnaNoBody:757436052850999386> - Nobody", "<:ChickenwinnaMakeup:757436043900485732> - ~~hookerwinna~~", "<:ChickenwinnaKing:757436055220912169> - KingWinna", "<:ChickenwinnaHalloween:760929363511476234> - SpookyWinna", "<:Chickenwinnastupidnormiebrand:757436051177341026> - CorsairWinna", "<:ChickenwinnaWacky:771179967210848267> - WackyWinna", "<:ChickenwinnaWall:757436048451043338> - WallWinna", "<:Chikanweenuh:757436045653704796> - Chikanweenuh", "<:ChuckleWinna:762714207304548353> - ChuckleWinna", "<:ChungusWinna:760929010107940945> - chunguswinna, the cw from the ideal timeline", "<:Frenchwinna:758389011248185375> - FrenchWinna", "<:Noobwinna:760017383980662814> - Noobwinna"]
 pdpsongs = ["https://youtu.be/GA6QunYgb-Q", "https://youtu.be/5tWoJndJA0E", "https://youtu.be/Qrax7n2QOwE", "https://youtu.be/KRXy2JkV3HU", "https://youtu.be/iKpSSA7jr3w", "https://youtu.be/WThe2NmwRfo", "https://youtu.be/E1Q-zYzp670", "https://youtu.be/n-MV8TCtCxk", "https://youtu.be/jmN6j67ZGjc", "https://youtu.be/B7VSMkS3VZ4", "https://youtu.be/2ZVD8enTzDM", "https://youtu.be/Sh5IwGyv7o8", "https://youtu.be/4U5uslyCbf8", "https://youtu.be/nN2scIaKbww", "https://youtu.be/dQw4w9WgXcQ"]
-perfectwords = ["big chungus", "chickenwinna", "ur mom"]
+perfectwords = ["big chungus", "chickenwinna", "ur mom", "dickenballs"]
 consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 
 # embeds
@@ -46,6 +46,9 @@ aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", descripti
 
 @client.event
 async def on_message(message):
+    
+    admin = discord.utils.get(message.guild.roles, id=757434054416007178)
+
     args = message.content.lower
     args = message.content.replace(prefix,"")
     argslist = args.split(" ")
@@ -86,23 +89,25 @@ async def on_message(message):
                 open('newemojiname', 'wt').write(ausubmitname)
                 files = await attachments_to_files(message.attachments,True)
                 await modchat.send(f"{message.author.mention} submited an au chickenwinna, *{ausubmitname}*", files=files)
-            elif (argslist[1] == "help"): # the au command set's very own help message command
+            elif (argslist[1] == "help"): # the au command set's very own help message command!
                 auhelpmessage.color = 0x00C400
                 await message.channel.send(embed=auhelpmessage)
             else:
                 auhelpmessage.color = 0xFF0000
                 await message.channel.send("unknown command, here are the commands for help", embed=auhelpmessage)
-        elif (argslist[0] == "morelike"): # the command that changes random letters with others
+        elif (argslist[0] == "morelike"): # the command that changes random letters with others in a bad attempt to be funny
             morelike = message.content[10:].lower()
+            for x in message.mentions:
+                morelike = morelike.replace(f"<!@{x.id}>",x.display_name.lower)
             #bully vresod
             if "vresod" in morelike:
                 morelike = morelike.replace("vresod", "big dumb stupid idiot head nerd")
-                await morelikeend(morelike=morelike, original=morelike, message=message)
+                await morelikeend(morelike=morelike, original="vresod", message=message)
                 return
             for word in perfectwords:
                 if morelike == word:
                     morelike = message.content[10:]
-                    await morelikeend(morelike, original=morelike)
+                    await morelikeend(morelike, original=morelike, message=message)
                     return
             # fart
             if (random.randrange(0, 2) == 1):
@@ -149,6 +154,27 @@ async def on_message(message):
         elif (argslist[0] == "help"): # the help message, duh
             helpmessage.color = 0x00C400
             await message.channel.send(embed=helpmessage)
+        elif (argslist[0] == "admin"):
+            if not admin in message.author.roles:
+                await message.channel.send("nope")
+                return
+            elif (argslist[1] == "pfp"):
+                try:
+                    if (argslist[2] == "reset"):
+                        await message.channel.send("reseting pfp...")
+                        await client.user.edit(avatar=open('resetpfp.png', 'rb').read())
+                        await message.channel.send("pfp has been reset back to normal")
+                except IndexError:
+                    try:
+                        try:
+                            open('newpfp.png', 'wb').write(requests.get(message.attachments[0].url, allow_redirects=True).content)
+                            await message.channel.send("changing pfp...")
+                            await client.user.edit(avatar=open('newpfp.png', 'rb').read())
+                            await message.channel.send("pfp has been changed")
+                        except discord.errors.HTTPException:
+                            await message.channel.send("You are changing your avatar too fast. Try again later.")
+                    except IndexError:
+                        await message.channel.send(f"https://cdn.discordapp.com/avatars/759088248537743380/{client.user.avatar}.png")
         else: # for when an unknown command is put in
             helpmessage.color = 0xFF0000
             await message.channel.send("unknown command, here are the commands for help", embed=helpmessage)
@@ -192,5 +218,11 @@ async def on_reaction_add(reaction, user):
         await message.channel.send(f"{user.name}, here is what the emoji inputs do: \n✅ accepts and makes the submission an emoji \n☑️ accepts but does not make submission and emoji \n❌ denies the submission\n❓ you are reading it now idiot")
     else:
         return
+
+@client.event
+async def on_member_update(before, after):
+    if not after.id == 347198887309869078:
+        return
+
 
 client.run(token)
