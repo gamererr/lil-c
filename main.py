@@ -69,11 +69,14 @@ async def on_message(message):
             return
         elif (argslist[0] == "au"): # au commands
             if (argslist[1] == "list"): # list all of the officially reconized au winnas
-                if (argslist[2] == "yes" or argslist[2] == "y"):
-                    await message.channel.send(embed=aulist)
-                elif (argslist[2] == "no" or argslist[2] == "n"):
-                    await message.channel.send(embed=aulistnoemoji)
-                else:
+                try:
+                    if (argslist[2] == "yes" or argslist[2] == "y"):
+                        await message.channel.send(embed=aulist)
+                    elif (argslist[2] == "no" or argslist[2] == "n"):
+                        await message.channel.send(embed=aulistnoemoji)
+                    else:
+                        await message.channel.send("fun fact: you can do !au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
+                except IndexError:
                     await message.channel.send("fun fact: you can do !au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
             elif (argslist[1] == "random"): # send a random au winna
                 await message.channel.send(auwinnas[random.randrange(len(auwinnas))])
@@ -100,7 +103,6 @@ async def on_message(message):
         elif (argslist[0] == "morelike"): # the command that changes random letters with others in a bad attempt to be funny
             morelike = message.content[10:].lower()
             for x in message.mentions:
-                print(message.content)
                 morelike = morelike.replace(f"<@!{x.id}>",x.name.lower())
             for word in perfectwords:
                 if morelike == word:
