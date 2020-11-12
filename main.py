@@ -38,12 +38,12 @@ perfectwords = ["big chungus", "chickenwinna", "ur mom", "dickenballs"]
 consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 
 # embeds
-helpmessage = discord.Embed(title="Commands", description="au - commands for au winnas, has extra arguemnts \nmorelike [word] - responds with '[word]? more like [word but edited]' \npdp - gives a random pdp song \nadmin - options for admins use !admin help for more", color=0x7e01e4)
-helpmessage.set_footer(text="comands with extra arguments can be used to get more info out of with !help [command]")
-auhelpmessage = discord.Embed(title="AU commands", description="random - gives a random AU winna with image and name (not coded yet) \nlist - lists all au winnas \nsubmit - submit an au winna to the mods (not added yet)", color=0x7e01e4)
+helpmessage = discord.Embed(title="Commands", description="***!au*** - commands for au winnas, has extra arguemnts \n***!morelike*** [word] - responds with '[word]? more like [word but edited]' \n***!pdp*** - gives a random pdp song \n***!admin*** - options for admins use !admin help for more \n***!echo*** - repeats what the user tells it to **only big c and use this command**", color=0x7e01e4)
+helpmessage.set_footer(text="comands with extra arguments can be used to get more info out of with ![command] help (i.e. !au help)")
+auhelpmessage = discord.Embed(title="AU commands", description="***!au random*** - gives a random AU winna with image and name (not coded yet) \n***!au list*** - lists all au winnas \n***!au submit*** - submit an au winna to the mods (not added yet)", color=0x7e01e4)
 aulist = discord.Embed(title="au winnas", description=f"{auwinnas[0]}\n{auwinnas[1]}\n{auwinnas[2]}\n{auwinnas[3]}\n{auwinnas[4]}\n{auwinnas[5]}\n{auwinnas[6]}\n{auwinnas[7]}\n{auwinnas[8]}\n{auwinnas[9]}\n{auwinnas[10]}\n{auwinnas[11]}\n{auwinnas[12]}\n{auwinnas[13]}\n{auwinnas[14]}\n{auwinnas[15]}\n{auwinnas[16]}\n{auwinnas[17]}\n{auwinnas[18]}\n{auwinnas[19]}\n{auwinnas[20]}\n{auwinnas[21]}\n{auwinnas[22]}\n{auwinnas[23]}\n{auwinnas[24]}\n{auwinnas[25]}\n{auwinnas[26]}\n{auwinnas[27]}\n{auwinnas[28]}\n{auwinnas[29]}\n{auwinnas[30]}\n{auwinnas[31]}\n{auwinnas[32]}", color=0x00C400)
 aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", description="there are none yet, check back later or submite some with !au submit")
-adminhelpmessage = discord.Embed(title="Admin Commands", description="pfp - change the bot's pfp **only big c and use this command**")
+adminhelpmessage = discord.Embed(title="Admin Commands", description="***!admin pfp*** - change the bot's pfp **only big c and use this command** \n***!admin status*** - change the bots status, arguements are as follows '!admin status [online/idle/dnd/offline] [playing/watching/listening/streaming] [name of activity i.e. Minecraft]")
 adminhelpmessage.set_footer(text="all of these commands can only be done if you have the admin role")
 
 @client.event
@@ -175,7 +175,7 @@ async def on_message(message):
                     except IndexError:
                         await message.channel.send(f"https://cdn.discordapp.com/avatars/759088248537743380/{client.user.avatar}.png")
             elif (argslist[1] == "status"):
-                if not admin in message.author.roles:
+                if not admin in message.author.roles or message.author.id == 347198887309869078:
                     return
                 try:
                     name = " ".join(argslist[4:])
@@ -208,7 +208,7 @@ async def on_message(message):
                 except IndexError:
                     await message.channel.send("you need to give a status")
             elif (argslist[1] == "help"):
-                if not admin in message.author.roles:
+                if not admin in message.author.roles or message.author.id == 347198887309869078:
                     return
                 adminhelpmessage.color = 0x00C400
                 await message.channel.send(embed=adminhelpmessage)
@@ -217,6 +217,12 @@ async def on_message(message):
                     return
                 adminhelpmessage.color = 0xFF0000
                 await message.channel.send("unknown command, here is the list of commands for the !admin command set", embed=adminhelpmessage)
+        elif (argslist[0] == "echo"):
+            if not (message.author.id == 347198887309869078):
+                return
+            images = await attachments_to_files(message.attachments,True)
+            await message.delete()
+            await message.channel.send(message.content[5:],files=images)
         else: # for when an unknown command is put in
             helpmessage.color = 0xFF0000
             await message.channel.send("unknown command, here are the commands for help", embed=helpmessage)
