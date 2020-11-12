@@ -38,12 +38,12 @@ perfectwords = ["big chungus", "chickenwinna", "ur mom", "dickenballs"]
 consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
 
 # embeds
-helpmessage = discord.Embed(title="Commands", description="au - commands for au winnas, has extra arguemnts \nmorelike [word] - responds with '[word]? more like [word but edited]' \npdp - gives a random pdp song", color=0x7e01e4)
+helpmessage = discord.Embed(title="Commands", description="au - commands for au winnas, has extra arguemnts \nmorelike [word] - responds with '[word]? more like [word but edited]' \npdp - gives a random pdp song \nadmin - options for admins use !admin help for more", color=0x7e01e4)
 helpmessage.set_footer(text="comands with extra arguments can be used to get more info out of with !help [command]")
 auhelpmessage = discord.Embed(title="AU commands", description="random - gives a random AU winna with image and name (not coded yet) \nlist - lists all au winnas \nsubmit - submit an au winna to the mods (not added yet)", color=0x7e01e4)
 aulist = discord.Embed(title="au winnas", description=f"{auwinnas[0]}\n{auwinnas[1]}\n{auwinnas[2]}\n{auwinnas[3]}\n{auwinnas[4]}\n{auwinnas[5]}\n{auwinnas[6]}\n{auwinnas[7]}\n{auwinnas[8]}\n{auwinnas[9]}\n{auwinnas[10]}\n{auwinnas[11]}\n{auwinnas[12]}\n{auwinnas[13]}\n{auwinnas[14]}\n{auwinnas[15]}\n{auwinnas[16]}\n{auwinnas[17]}\n{auwinnas[18]}\n{auwinnas[19]}\n{auwinnas[20]}\n{auwinnas[21]}\n{auwinnas[22]}\n{auwinnas[23]}\n{auwinnas[24]}\n{auwinnas[25]}\n{auwinnas[26]}\n{auwinnas[27]}\n{auwinnas[28]}\n{auwinnas[29]}\n{auwinnas[30]}\n{auwinnas[31]}\n{auwinnas[32]}", color=0x00C400)
 aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", description="there are none yet, check back later or submite some with !au submit")
-adminhelpmessage = discord.Embed(title="Admin Commands", description="pfp - change the bot's pfp")
+adminhelpmessage = discord.Embed(title="Admin Commands", description="pfp - change the bot's pfp **only big c and use this command**")
 adminhelpmessage.set_footer(text="all of these commands can only be done if you have the admin role")
 
 @client.event
@@ -155,10 +155,9 @@ async def on_message(message):
             helpmessage.color = 0x00C400
             await message.channel.send(embed=helpmessage)
         elif (argslist[0] == "admin"):
-            if not admin in message.author.roles:
-                await message.channel.send("nope")
-                return
-            elif (argslist[1] == "pfp"):
+            if (argslist[1] == "pfp"):
+                if not (message.author.id == 347198887309869078):
+                    return
                 try:
                     if (argslist[2] == "reset"):
                         await message.channel.send("reseting pfp...")
@@ -175,10 +174,47 @@ async def on_message(message):
                             await message.channel.send("You are changing your avatar too fast. Try again later.")
                     except IndexError:
                         await message.channel.send(f"https://cdn.discordapp.com/avatars/759088248537743380/{client.user.avatar}.png")
+            elif (argslist[1] == "status"):
+                if not admin in message.author.roles:
+                    return
+                try:
+                    name = " ".join(argslist[4:])
+                    if (argslist[3] == "playing"):
+                        activity = discord.Activity(name=name,type=discord.ActivityType.playing)
+                    if (argslist[3] == "watching"):
+                        activity = discord.Activity(name=name, type=discord.ActivityType.watching)
+                    if (argslist[3] == "streaming"):
+                        activity = discord.Activity(name=name, type=discord.ActivityType.streaming)
+                    if (argslist[3] == "listening"):
+                        activity = discord.Activity(name=name, type=discord.ActivityType.listening)
+                except IndexError:
+                    activity = None
+
+                try: 
+                    if (argslist[2] == "online"):
+                        await client.change_presence(status=discord.Status.online, activity=activity)
+                        await message.channel.send("status set to online")
+                    elif (argslist[2] == "idle"):
+                        await client.change_presence(status=discord.Status.idle, activity=activity)
+                        await message.channel.send("status set to idle")
+                    elif (argslist[2] == "dnd"):
+                        await client.change_presence(status=discord.Status.dnd, activity=activity)
+                        await message.channel.send("status set to dnd")
+                    elif (argslist[2] == "offline"):
+                        await client.change_presence(status=discord.Status.offline)
+                        await message.channel.send("status set to offline")
+                    else:
+                        await message.channel.send("thats not an actual status idiot")
+                except IndexError:
+                    await message.channel.send("you need to give a status")
             elif (argslist[1] == "help"):
+                if not admin in message.author.roles:
+                    return
                 adminhelpmessage.color = 0x00C400
                 await message.channel.send(embed=adminhelpmessage)
             else:
+                if not admin in message.author.roles:
+                    return
                 adminhelpmessage.color = 0xFF0000
                 await message.channel.send("unknown command, here is the list of commands for the !admin command set", embed=adminhelpmessage)
         else: # for when an unknown command is put in
