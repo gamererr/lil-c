@@ -34,8 +34,9 @@ prefix = "!"
 # lists
 auwinnas = ["<:Chickenwinna:759085236679868526> - chickenwinna prime, the basic chickenwinna", "<:ThiefChickenwinna:757436624152821770> - Thiefwinna", "<:WarWinna:759283034645594112> - WarWinna", "<:ThatWinna:757436113743773818> - ThatWinna", "<:StinkyWinna:760016992505036820> - StinkyWinna, he smells", "<:PogWinna:759044866444361788> - POGCHAMP", "<:Chickenwinna2020:757436053589196900> - Chickenwinna 2020", "<:ArrowWinna:759053771773968395> - KoichiWinna (arrow alt)", "<:ChickenwinnaBaldMartin:757436055766171649> - MartinWinna", "<:ChickenwinnaDistraction:757436043589976155> - DistractionWinna, what was i saying again?", "<:ChickenwinnaFnafCostume:757436050770493571> - FreddyWinna", "<:ChickenwinnaFubiBu:771180135487111219> - Fubibu Junor", "<:ChickenwinnaGame:757436050875613226> - Gamewinna, the gamer has become the game", "<:ChickenwinnaGhost:757436043761942568> - GhostWinna", "<:ChickenwinnaGolden:757436052502872124> - GoldenWinna", "<:ChickenwinnaSock:758036446006214780> - SockWinna", "<:ChickenwinnaSociety:757436044055674890> - JokerWinna", "<:ChickenwinnaSad:757436043816468490> - SadWinna", "<:ChickenwinnaPasta:757436048211968121> - NoodleWinna", "<:ChickenwinnaOriginal:757436043837308960> - OGWinna", "<:ChickenwinnaNoBody:757436052850999386> - Nobody", "<:ChickenwinnaMakeup:757436043900485732> - ~~hookerwinna~~", "<:ChickenwinnaKing:757436055220912169> - KingWinna", "<:ChickenwinnaHalloween:760929363511476234> - SpookyWinna", "<:Chickenwinnastupidnormiebrand:757436051177341026> - CorsairWinna", "<:ChickenwinnaWacky:771179967210848267> - WackyWinna", "<:ChickenwinnaWall:757436048451043338> - WallWinna", "<:Chikanweenuh:757436045653704796> - Chikanweenuh", "<:ChuckleWinna:762714207304548353> - ChuckleWinna", "<:ChungusWinna:760929010107940945> - chunguswinna, the cw from the ideal timeline", "<:Frenchwinna:758389011248185375> - FrenchWinna", "<:Noobwinna:760017383980662814> - Noobwinna", "<:darkwinna:775724825699155999> - Darkwinna"]
 pdpsongs = ["https://youtu.be/GA6QunYgb-Q", "https://youtu.be/5tWoJndJA0E", "https://youtu.be/Qrax7n2QOwE", "https://youtu.be/KRXy2JkV3HU", "https://youtu.be/iKpSSA7jr3w", "https://youtu.be/WThe2NmwRfo", "https://youtu.be/E1Q-zYzp670", "https://youtu.be/n-MV8TCtCxk", "https://youtu.be/jmN6j67ZGjc", "https://youtu.be/B7VSMkS3VZ4", "https://youtu.be/2ZVD8enTzDM", "https://youtu.be/Sh5IwGyv7o8", "https://youtu.be/4U5uslyCbf8", "https://youtu.be/nN2scIaKbww", "https://youtu.be/dQw4w9WgXcQ"]
-perfectwords = ["big chungus", "chickenwinna", "ur mom", "dickenballs"]
+perfectwords = ["big chungus", "chickenwinna", "ur mom", "dickenballs", "chick marley"]
 consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", "th", "wh", "zh", "ci", "wr", "qu", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
+BlacklistedUsers = [425077336782929921, 525495267537977344]
 
 # embeds
 helpmessage = discord.Embed(title="Commands", description="***!au*** - commands for au winnas, has extra arguemnts \n***!morelike*** [word] - responds with '[word]? more like [word but edited]' \n***!pdp*** - gives a random pdp song \n***!admin*** - options for admins use !admin help for more \n***!echo*** - repeats what the user tells it to **only big c and use this command**", color=0x7e01e4)
@@ -43,12 +44,15 @@ helpmessage.set_footer(text="comands with extra arguments can be used to get mor
 auhelpmessage = discord.Embed(title="AU commands", description="***!au random*** - gives a random AU winna with image and name (not coded yet) \n***!au list*** - lists all au winnas \n***!au submit*** - submit an au winna to the mods (not added yet)", color=0x7e01e4)
 aulist = discord.Embed(title="au winnas", description=f"{auwinnas[0]}\n{auwinnas[1]}\n{auwinnas[2]}\n{auwinnas[3]}\n{auwinnas[4]}\n{auwinnas[5]}\n{auwinnas[6]}\n{auwinnas[7]}\n{auwinnas[8]}\n{auwinnas[9]}\n{auwinnas[10]}\n{auwinnas[11]}\n{auwinnas[12]}\n{auwinnas[13]}\n{auwinnas[14]}\n{auwinnas[15]}\n{auwinnas[16]}\n{auwinnas[17]}\n{auwinnas[18]}\n{auwinnas[19]}\n{auwinnas[20]}\n{auwinnas[21]}\n{auwinnas[22]}\n{auwinnas[23]}\n{auwinnas[24]}\n{auwinnas[25]}\n{auwinnas[26]}\n{auwinnas[27]}\n{auwinnas[28]}\n{auwinnas[29]}\n{auwinnas[30]}\n{auwinnas[31]}\n{auwinnas[32]}", color=0x00C400)
 aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", description="there are none yet, check back later or submite some with !au submit")
-adminhelpmessage = discord.Embed(title="Admin Commands", description="***!admin pfp*** - change the bot's pfp **only big c and use this command** \n***!admin status*** - change the bots status, arguements are as follows '!admin status [online/idle/dnd/offline] [playing/watching/listening/streaming] [name of activity i.e. Minecraft]")
+adminhelpmessage = discord.Embed(title="Admin Commands", description="***!admin pfp*** - change the bot's pfp **only big c and use this command** \n***!admin status*** - change the bots status, arguements are as follows '!admin status [online/idle/dnd/offline] [playing/watching/listening/streaming] [name of activity i.e. Minecraft]\n***!admin name [something]*** - change bot name")
 adminhelpmessage.set_footer(text="all of these commands can only be done if you have the admin role")
 
 @client.event
 async def on_message(message):
     
+    if message.author.id in BlacklistedUsers:
+        return
+
     admin = discord.utils.get(message.guild.roles, id=757434054416007178)
 
     args = message.content.lower
@@ -154,9 +158,10 @@ async def on_message(message):
         elif (argslist[0] == "help"): # the help message, duh
             helpmessage.color = 0x00C400
             await message.channel.send(embed=helpmessage)
-        elif (argslist[0] == "admin"):
+        elif (argslist[0] == "admin"): # admin only commands
             if (argslist[1] == "pfp"):
                 if not (message.author.id == 347198887309869078):
+                    await message.channel.send(f"https://cdn.discordapp.com/avatars/759088248537743380/{client.user.avatar}.png")
                     return
                 try:
                     if (argslist[2] == "reset"):
@@ -175,7 +180,7 @@ async def on_message(message):
                     except IndexError:
                         await message.channel.send(f"https://cdn.discordapp.com/avatars/759088248537743380/{client.user.avatar}.png")
             elif (argslist[1] == "status"):
-                if not admin in message.author.roles or message.author.id == 347198887309869078:
+                if not admin in message.author.roles:
                     return
                 try:
                     name = " ".join(argslist[4:])
@@ -207,6 +212,16 @@ async def on_message(message):
                         await message.channel.send("thats not an actual status idiot")
                 except IndexError:
                     await message.channel.send("you need to give a status")
+            elif (argslist[1] == "name"):
+                newname = " ".join(argslist[2:])
+                if len(newname) > 32:
+                    return
+                await message.channel.send("changing name...")
+                try:
+                    await client.user.edit(username=newname)
+                    await message.channel.send("named changed!")
+                except discord.errors.HTTPException:
+                    await message.channel.send("You are changing your username or Discord Tag too fast. Try again later.")
             elif (argslist[1] == "help"):
                 if not admin in message.author.roles or message.author.id == 347198887309869078:
                     return
@@ -217,12 +232,15 @@ async def on_message(message):
                     return
                 adminhelpmessage.color = 0xFF0000
                 await message.channel.send("unknown command, here is the list of commands for the !admin command set", embed=adminhelpmessage)
-        elif (argslist[0] == "echo"):
+        elif (argslist[0] == "echos"): # command for big c to make lil c say what he wants
             if not (message.author.id == 347198887309869078):
                 return
             images = await attachments_to_files(message.attachments,True)
+            try:
+                await message.channel.send(message.content[6:],files=images)
+            except discord.errors.HTTPException:
+                await message.channel.send("Cannot send an empty message")
             await message.delete()
-            await message.channel.send(message.content[5:],files=images)
         else: # for when an unknown command is put in
             helpmessage.color = 0xFF0000
             await message.channel.send("unknown command, here are the commands for help", embed=helpmessage)
@@ -232,6 +250,7 @@ async def on_reaction_add(reaction, user):
     message = reaction.message
     modchat = discord.utils.get(message.guild.channels, id=757449377819263028)
     general = discord.utils.get(message.guild.channels, id=757433959117488193)
+    
     if user == client.user:
         return
     if not ("submited an au chickenwinna, " in message.content) and (message.author == client.user) and (message.channel == modchat):
