@@ -200,21 +200,21 @@ async def on_message(message):
                 try: 
                     if (argslist[2] == "online"):
                         await client.change_presence(status=discord.Status.online, activity=activity)
-                        await message.channel.send("status set to online")
                     elif (argslist[2] == "idle"):
                         await client.change_presence(status=discord.Status.idle, activity=activity)
-                        await message.channel.send("status set to idle")
                     elif (argslist[2] == "dnd"):
                         await client.change_presence(status=discord.Status.dnd, activity=activity)
-                        await message.channel.send("status set to dnd")
                     elif (argslist[2] == "offline"):
                         await client.change_presence(status=discord.Status.offline)
-                        await message.channel.send("status set to offline")
                     else:
                         await message.channel.send("thats not an actual status idiot")
+                        return
+                    await message.channel.send(f"status set to {message.content[14:]}")
                 except IndexError:
                     await message.channel.send("you need to give a status")
             elif (argslist[1] == "name"):
+                if not admin in message.author.roles:
+                    return
                 newname = " ".join(argslist[2:])
                 if len(newname) > 32:
                     return
