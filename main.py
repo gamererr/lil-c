@@ -139,6 +139,8 @@ async def on_message(message):
             morelike = morelike.replace("a", "e")
             for x in consonants:
                 morelike = morelike.replace(f"{x}ee",f"pee")
+            morelike = morelike.replace("fertnote", "fartnite")
+            morelike = morelike.replace("foortnote", "fartnite")
             await morelikeend(morelike, original=message.content[10:].lower(), message=message)
         elif (argslist[0] == "pdp"): # command that sends a song from the show Puppy Dog Pals
             if not (len(argslist) == 1): # for specifically requesting a song
