@@ -29,7 +29,7 @@ async def morelikeend(morelike, original, message):
 async def on_ready():
 	print("hello world!")
 
-prefix = "!"
+prefix = "~"
 
 # lists
 auwinnas = ["<:Chickenwinna:759085236679868526> - chickenwinna prime, the basic chickenwinna", "<:ThiefChickenwinna:757436624152821770> - Thiefwinna", "<:WarWinna:759283034645594112> - WarWinna", "<:ThatWinna:757436113743773818> - ThatWinna", "<:StinkyWinna:760016992505036820> - StinkyWinna, he smells", "<:PogWinna:759044866444361788> - POGCHAMP", "<:Chickenwinna2020:757436053589196900> - Chickenwinna 2020", "<:ArrowWinna:759053771773968395> - KoichiWinna (arrow alt)", "<:ChickenwinnaBaldMartin:757436055766171649> - MartinWinna", "<:ChickenwinnaDistraction:757436043589976155> - DistractionWinna, what was i saying again?", "<:ChickenwinnaFnafCostume:757436050770493571> - FreddyWinna", "<:ChickenwinnaFubiBu:771180135487111219> - Fubibu Junor", "<:ChickenwinnaGame:757436050875613226> - Gamewinna, the gamer has become the game", "<:ChickenwinnaGhost:757436043761942568> - GhostWinna", "<:ChickenwinnaGolden:757436052502872124> - GoldenWinna", "<:ChickenwinnaSock:758036446006214780> - SockWinna", "<:ChickenwinnaSociety:757436044055674890> - JokerWinna", "<:ChickenwinnaSad:757436043816468490> - SadWinna", "<:ChickenwinnaPasta:757436048211968121> - NoodleWinna", "<:ChickenwinnaOriginal:757436043837308960> - OGWinna", "<:ChickenwinnaNoBody:757436052850999386> - Nobody", "<:ChickenwinnaMakeup:757436043900485732> - ~~hookerwinna~~", "<:ChickenwinnaKing:757436055220912169> - KingWinna", "<:ChickenwinnaHalloween:760929363511476234> - SpookyWinna", "<:Chickenwinnastupidnormiebrand:757436051177341026> - CorsairWinna", "<:ChickenwinnaWacky:771179967210848267> - WackyWinna", "<:ChickenwinnaWall:757436048451043338> - WallWinna", "<:Chikanweenuh:757436045653704796> - Chikanweenuh", "<:ChuckleWinna:762714207304548353> - ChuckleWinna", "<:ChungusWinna:760929010107940945> - chunguswinna, the cw from the ideal timeline", "<:Frenchwinna:758389011248185375> - FrenchWinna", "<:Noobwinna:760017383980662814> - Noobwinna", "<:darkwinna:775724825699155999> - Darkwinna"]
@@ -39,13 +39,13 @@ consonants = ["pr", "br", "sc", "ng", "ch", "ck", "gh", "ph", "rh", "sh", "ti", 
 BlacklistedUsers = [425077336782929921, 525495267537977344]
 
 # embeds
-helpmessage = discord.Embed(title="Commands", description="***!au*** - commands for au winnas, has extra arguemnts \n***!morelike*** [word] - responds with '[word]? more like [word but edited]' \n***!pdp*** - gives a random pdp song \n***!admin*** - options for admins use !admin help for more \n***!echo*** - repeats what the user tells it to **only big c and use this command**", color=0x7e01e4)
-helpmessage.set_footer(text="comands with extra arguments can be used to get more info out of with ![command] help (i.e. !au help)")
-auhelpmessage = discord.Embed(title="AU commands", description="***!au random*** - gives a random AU winna with image and name (not coded yet) \n***!au list*** - lists all au winnas \n***!au submit*** - submit an au winna to the mods (not added yet)", color=0x7e01e4)
+helpmessage = discord.Embed(title="Commands", description=f"***{prefix}au*** - commands for au winnas, has extra arguemnts \n***{prefix}morelike*** [word] - responds with '[word]? more like [word but edited]' \n***{prefix}pdp*** - gives a random pdp song \n***{prefix}admin*** - options for admins use {prefix}admin help for more \n***{prefix}echo*** - repeats what the user tells it to **only big c and use this command**", color=0x7e01e4)
+helpmessage.set_footer(text=f"comands with extra arguments can be used to get more info out of with {prefix}[command] help (i.e. {prefix}au help)")
+auhelpmessage = discord.Embed(title="AU commands", description=f"***{prefix}au random*** - gives a random AU winna with image and name (not coded yet) \n***{prefix}au list*** - lists all au winnas \n***{prefix}au submit*** - submit an au winna to the mods (not added yet)", color=0x7e01e4)
 aulist = discord.Embed(title="au winnas", description=f"{auwinnas[0]}\n{auwinnas[1]}\n{auwinnas[2]}\n{auwinnas[3]}\n{auwinnas[4]}\n{auwinnas[5]}\n{auwinnas[6]}\n{auwinnas[7]}\n{auwinnas[8]}\n{auwinnas[9]}\n{auwinnas[10]}\n{auwinnas[11]}\n{auwinnas[12]}\n{auwinnas[13]}\n{auwinnas[14]}\n{auwinnas[15]}\n{auwinnas[16]}\n{auwinnas[17]}\n{auwinnas[18]}\n{auwinnas[19]}\n{auwinnas[20]}\n{auwinnas[21]}\n{auwinnas[22]}\n{auwinnas[23]}\n{auwinnas[24]}\n{auwinnas[25]}\n{auwinnas[26]}\n{auwinnas[27]}\n{auwinnas[28]}\n{auwinnas[29]}\n{auwinnas[30]}\n{auwinnas[31]}\n{auwinnas[32]}", color=0x00C400)
-aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", description="there are none yet, check back later or submite some with !au submit")
-adminhelpmessage = discord.Embed(title="Admin Commands", description="***!admin pfp*** - change the bot's pfp **only big c and use this command** \n***!admin status*** - change the bots status, arguements are as follows '!admin status [online/idle/dnd/offline] [playing/watching/listening/streaming] [name of activity i.e. Minecraft]\n***!admin name [something]*** - change bot name")
-adminhelpmessage.set_footer(text="all of these commands can only be done if you have the admin role")
+aulistnoemoji = discord.Embed(title="au winnas that dont have emojis", description=f"there are none yet, check back later or submite some with {prefix}au submit")
+adminhelpmessage = discord.Embed(title="Admin Commands", description=f"***{prefix}admin pfp*** - change the bot's pfp **only big c and use this command** \n***{prefix}admin status*** - change the bots status, arguements are as follows '{prefix}admin status [online/idle/dnd/offline] [playing/watching/listening/streaming] [name of activity i.e. Minecraft]\n***{prefix}admin name [something]*** - change bot name")
+adminhelpmessage.set_footer(text=f"all of these commands can only be done if you have the admin role")
 
 @client.event
 async def on_message(message):
@@ -61,7 +61,7 @@ async def on_message(message):
 
     modchat = discord.utils.get(message.guild.channels, id=757449377819263028)
 
-    # add reaction buttons for !au submit
+    # add reaction buttons for au submit
     if ("submited an au chickenwinna, " in message.content) and (message.author == client.user) and (message.channel == modchat):
         await message.add_reaction("✅")
         await message.add_reaction("☑️")
@@ -79,9 +79,9 @@ async def on_message(message):
                     elif (argslist[2] == "no" or argslist[2] == "n"):
                         await message.channel.send(embed=aulistnoemoji)
                     else:
-                        await message.channel.send("fun fact: you can do !au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
+                        await message.channel.send(f"fun fact: you can do {prefix}au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
                 except IndexError:
-                    await message.channel.send("fun fact: you can do !au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
+                    await message.channel.send(f"fun fact: you can do {prefix}au list <yes/no> to choose whether or not you want the list of aus with or without the emojis", embed=aulist)
             elif (argslist[1] == "random"): # send a random au winna
                 await message.channel.send(auwinnas[random.randrange(len(auwinnas))])
             elif (argslist[1] == "submit"): # submiting an au chickenwinna
@@ -94,8 +94,8 @@ async def on_message(message):
                 except IndexError:
                     await message.channel.send("you need an image")
                 r = requests.get(ausubmitemoji.url, allow_redirects=True)
-                open('newemoji.png', 'wb').write(r.content)
-                open('newemojiname', 'wt').write(ausubmitname)
+                open('images/newemoji.png', 'wb').write(r.content)
+                open('texts/newemojiname', 'wt').write(ausubmitname)
                 files = await attachments_to_files(message.attachments,True)
                 await modchat.send(f"{message.author.mention} submited an au chickenwinna, *{ausubmitname}*", files=files)
             elif (argslist[1] == "help"): # the au command set's very own help message command!
@@ -168,14 +168,14 @@ async def on_message(message):
                 try:
                     if (argslist[2] == "reset"):
                         await message.channel.send("reseting pfp...")
-                        await client.user.edit(avatar=open('resetpfp.png', 'rb').read())
+                        await client.user.edit(avatar=open('images/resetpfp.png', 'rb').read())
                         await message.channel.send("pfp has been reset back to normal")
                 except IndexError:
                     try:
                         try:
-                            open('newpfp.png', 'wb').write(requests.get(message.attachments[0].url, allow_redirects=True).content)
+                            open('images/newpfp.png', 'wb').write(requests.get(message.attachments[0].url, allow_redirects=True).content)
                             await message.channel.send("changing pfp...")
-                            await client.user.edit(avatar=open('newpfp.png', 'rb').read())
+                            await client.user.edit(avatar=open('images/newpfp.png', 'rb').read())
                             await message.channel.send("pfp has been changed")
                         except discord.errors.HTTPException:
                             await message.channel.send("You are changing your avatar too fast. Try again later.")
@@ -233,7 +233,7 @@ async def on_message(message):
                 if not admin in message.author.roles:
                     return
                 adminhelpmessage.color = 0xFF0000
-                await message.channel.send("unknown command, here is the list of commands for the !admin command set", embed=adminhelpmessage)
+                await message.channel.send(f"unknown command, here is the list of commands for the {prefix}admin command set", embed=adminhelpmessage)
         elif (argslist[0] == "echos"): # command for big c to make lil c say what he wants
             if not (message.author.id == 347198887309869078):
                 return
@@ -258,8 +258,8 @@ async def on_reaction_add(reaction, user):
     if not ("submited an au chickenwinna, " in message.content) and (message.author == client.user) and (message.channel == modchat):
         return
 
-    newemojiname = open('newemojiname', 'rt').read()
-    newemoji = open('newemoji.png', 'rb').read()
+    newemojiname = open('texts/newemojiname', 'rt').read()
+    newemoji = open('images/newemoji.png', 'rb').read()
 
     if reaction.emoji == "✅":
         try:
